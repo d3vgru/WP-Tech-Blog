@@ -5,7 +5,7 @@ Plugin URI: http://www.freshlabs.de/journal/archives/2006/10/wordpress-plugin-si
 Description: Integrates the <a href="http://simile.mit.edu/timeline/">SIMILE Timeline</a> with WordPress and provides an option interface for the various timeline settings. With this plugin you can display posts from a specific category in the Timeline Widget. Simply include the <strong>[similetimeline]</strong> shortcode in your page or post and specify the category on the <a href="options-general.php?page=timeline.php">admin page</a>.
 Author: Tim Isenheim
 Author URI: http://www.freshlabs.de/journal
-Version: 0.4.8.4
+Version: 0.4.8.5
 */
 /*
 	SIMILE Timeline for WordPress
@@ -40,8 +40,8 @@ include('inc/WPSimileTimelineBand.class.php'); // class for timeline band
 include('inc/WPSimileTimelineHotzone.class.php'); // class for timeline hotzone
 include('inc/WPSimileTimelineDecorator.class.php'); // class for timeline decorator
 
-@define('STL_TIMELINE_PLUGIN_DATESTRING', '20111212');
-@define('STL_TIMELINE_PLUGIN_VERSION', '0.4.8.4');
+@define('STL_TIMELINE_PLUGIN_DATESTRING', '20120321');
+@define('STL_TIMELINE_PLUGIN_VERSION', '0.4.8.5');
 @define('STL_TIMELINE_FOLDER', WP_PLUGIN_URL.'/wp-simile-timeline');
 @define('STL_TIMELINE_DATA_FOLDER', STL_TIMELINE_FOLDER.'/data');
 @define('STL_TIMELINE_API_URL', 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true'); // use &defaultLocale to override detected locale
@@ -227,6 +227,12 @@ class WPSimileTimelineLoader{
 			if( function_exists('add_meta_box')) {
 				add_meta_box( 'stl-timeline-event-data', __( 'SIMILE Timeline', 'stl_timeline' ), array('WPSimileTimelineAdmin', 'outputCustomPostDateOptions'), 'post', 'advanced' );
 				add_meta_box( 'stl-timeline-event-data', __( 'SIMILE Timeline', 'stl_timeline' ), array('WPSimileTimelineAdmin', 'outputCustomPostDateOptions'), 'page', 'advanced' );
+				
+				// Adding meta boxes for all registered custom posts
+				$post_types = WPSimileTimelineToolbox::getCustomPostTypes();
+				foreach($post_types as $post_type):
+					add_meta_box( 'stl-timeline-event-data', __( 'SIMILE Timeline', 'stl_timeline' ), array('WPSimileTimelineAdmin', 'outputCustomPostDateOptions'), $post_type, 'advanced' );
+				endforeach;
 			}
 		}
 	}

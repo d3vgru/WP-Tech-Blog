@@ -1,3 +1,8 @@
-<div id="message" class="updated fade">
-	<p><strong><?php _e( 'All-in-One Event Calendar Notice:', AI1EC_PLUGIN_NAME ) ?></strong> <?php echo $msg ?></p>
+<div class="message updated fade">
+	<p>
+		<strong><?php echo $label ?></strong> <?php echo $msg ?>
+		<?php if( isset( $button ) ) : ?>
+			<br /><input type="button" class="button <?php echo $button->class ?>" value="<?php echo $button->value ?>" />
+		<?php endif ?>
+	</p>
 </div>

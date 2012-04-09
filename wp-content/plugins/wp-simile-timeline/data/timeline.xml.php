@@ -70,7 +70,7 @@ $taxonomies = array(
 );
 /* Loop custom taxonomies and assign to temp array including ID and terms */
 foreach($custom_taxonomies as $ct){
-	$tmp['taxonomy'] = $ct->query_var;
+	$tmp['taxonomy'] = $ct->name;
 	$tmp['field'] ='id';
 	$tmp['terms'] = explode(',', $terms);
 	array_push($taxonomies, $tmp);
@@ -195,7 +195,7 @@ while ($query->have_posts()) : $query->the_post();
 	if(is_array($term_tags)) array_push($tids, $term_tags);
 
 	foreach($custom_taxonomies as $ct){
-		$ctt = get_the_terms($post->ID, $ct->query_var);
+		$ctt = get_the_terms($post->ID, $ct->name);
 		if(is_array($ctt)) array_push($tids, $ctt);
 	}
 	$tids_a = explode(',', $wpst_term->getActiveTerms()); // Terms set active in admin options

@@ -533,7 +533,7 @@ class WPSimileTimelineAdmin{
 					<fieldset class="options">
 					<h3><?php _e($custom_taxonomy->labels->name); ?></h3>
 						<p><small><?php printf(__('Select the tags the Timeline should display posts from.','stl_timeline') ); ?></small></p>
-						<?php WPSimileTimelineAdmin::outputTermsTable($custom_taxonomy->query_var); ?>
+						<?php /* TODO: Name or query_var? */ WPSimileTimelineAdmin::outputTermsTable($custom_taxonomy->name); ?>
 						<p class="submit"><input type="submit" class="button-primary" name="Submit" value="<?php _e('Update Options', 'stl_timeline') ?>" /></p>
 					</fieldset>
 					<?php endforeach; ?>
@@ -778,7 +778,7 @@ class WPSimileTimelineAdmin{
 		?>
 		<h4 class="stl-suboption-handle"><?php echo $hotzone->name; ?></h4>
 		<div class="stl-delete-link">
-			<a id="stl-delete-hotzone<?php echo $hotzone->id; ?>" href="<?php echo wp_nonce_url('options-general.php?page=timeline.php&amp;action=delete-hotzone&amp;id='.$hotzone->id.'#stl-design', STL_TIMELINE_NONCE_NAME); ?>"><?php _e('Delete', 'stl_timeline'); ?></a>
+			<a id="stl-delete-hotzone<?php echo $hotzone->id; ?>" href="<?php echo wp_nonce_url('admin.php?page=wp-simile-timeline&amp;action=delete-hotzone&amp;id='.$hotzone->id.'#stl-design', STL_TIMELINE_NONCE_NAME); ?>"><?php _e('Delete', 'stl_timeline'); ?></a>
 			<script type="text/javascript">
 			jQuery(document).ready( function($){
 				$('#stl-delete-hotzone<?php echo $hotzone->id; ?>').click(function(){

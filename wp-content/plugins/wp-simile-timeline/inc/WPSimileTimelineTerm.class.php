@@ -114,7 +114,14 @@ class WPSimileTimelineTerm{
 		$sql = "SELECT term_id FROM " . WPSimileTimelineTerm::getTableName();
 		$res = $wpdb->get_results($sql, ARRAY_A);
 	
-		$terms = get_terms(array('category', 'link_category'));
+		// include custom taxonomies
+		$ct = WPSimileTimelineTerm::getCustomTaxonomies();
+		$custom_tax_names = array();
+		foreach($ct as $slug=>$arr){
+			array_push($custom_tax_names, $arr->name);
+		}
+		
+		$terms = get_terms(array('category', 'link_category', implode(',', $custom_tax_names) ), 'hide_empty=0');
 		
 		$cmp = array();
 		// copy categories to stl_timeline term relationship table
@@ -198,8 +205,10 @@ class WPSimileTimelineTerm{
 		else{
 			$terms = $termdata;
 		}
-	
-		if ($terms) {
+		
+		$class = get_class($terms[0]);
+
+		if ($terms && $class != 'WP_Error') {
 			$index = 1;
 			$i=0;
 			foreach ($terms as $category) {
@@ -231,6 +240,8 @@ class WPSimileTimelineTerm{
 				$i++;
 			}
 		} else {
+			// Term error can occur here with certain custom taxonomy definitions
+			print_r($terms);
 			return false;
 		}
 	}

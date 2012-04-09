@@ -8,7 +8,7 @@ Author:            Robert Harm (with special support from Sindre Wimberger)
 Donate link:       http://www.mapsmarker.com/donations
 Requires at least: 3.0 
 Tested up to:      3.4-alpha-19904
-Stable tag:        2.0
+Stable tag:        2.2
 
 Pin, organize & show your favorite places through OpenStreetMap/WMTS, Google Maps/Earth (KML), GeoJSON, GeoRSS or Augmented-Reality browsers
 
@@ -50,6 +50,7 @@ to the visitors of your website.
 * TinyMCE button for easily searching and adding maps on post/pages edit screen
 * display a list of markers below layer maps
 * show standalone maps in fullscreen mode
+* automatically generated geo sitemap for all maps (for submitting to Google)
 * support for microformat geo-markup to make your maps machine-readable
 * support for custom marker timestamps for more precise KML animations - [demo video](http://www.youtube.com/watch?v=LXliLaZ4u-E)
 * create QR code images for standalone maps in fullscreen mode
@@ -93,6 +94,7 @@ Please let me know which feature you think is missing by adding your ideas at [h
 * Spanish (es_ES) thanks to David Ramirez, [http://www.hiperterminal.com](http://www.hiperterminal.com)
 * Dutch (nl_NL) thanks to Marijke Metz, [http://www.mergenmetz.nl](http://www.mergenmetz.nl)
 * French (fr_FR) thanks to Vincèn Pujol, [http://www.skivr.com](http://www.skivr.com)
+* Italian (it_IT) thanks to [Luca Barbetti](http://twitter.com/okibone)
 
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
@@ -170,6 +172,12 @@ This program is free software; you can redistribute it and/or modify it under th
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
 == Upgrade Notice ==
+= v2.2 =
+added new map options, bugfix
+
+= v2.1 =
+added support for MapBox basemaps, TinyMCE button optimizations, check for incompatible plugins, Italian translation
+
 = v2.0 =
 added support for geo sitemaps, new mass actions for selected markers only, important bugfix for French translations causing maps to break
 
@@ -222,6 +230,26 @@ Added new features and bugfixes - see http://www.mapsmarker.com/v1.1 for more de
 Initial release - see http://www.mapsmarker.com/v1.0 for more details
 
 == Changelog ==
+= v2.2 - 24.03.2012 =
+* [Blog post with more details about this release](http://www.mapsmarker.com/v2.2)
+* NEW: support for new map options (dragging, touchzoom, scrollWheelZoom...)
+* CHANGED: updated Italian translation thanks to [Luca Barbetti](http://twitter.com/okibone)
+* BUGFIX: TinyMCE button did not work when WordPress was installed in custom directory
+
+= v2.1 - 18.03.2012 =
+* [Blog post with more details about this release](http://www.mapsmarker.com/v2.1)
+* NEW: added changelog info box after each plugin update
+* NEW: added support for MapBox basemaps
+* NEW: added option to hide API links on markers list below layer maps
+* NEW: added check for incompatible plugins
+* NEW: Italian translation thanks to [Luca Barbetti](http://twitter.com/okibone)
+* CHANGED: optimized search results table for maps (started with TinyMCE button on post/page edit screen)
+* CHANGED: updated French translation thanks to Vincèn Pujol, [http://www.skivr.com](http://www.skivr.com)
+* CHANGED: updated Dutch translation thanks to [Marijke](http://www.mergenmetz.nl)
+* CHANGED: updated Japanese translations thanks to [Shu Higashi](http://twitter.com/higa4)
+* BUGFIX: attribution text is not cleared on backend maps if basemap is changed
+* BUGFIX: removed double slashes from image urls in settings
+
 = v2.0 - 13.03.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v2.0)
 * NEW: added support for geo sitemaps for all marker and layer maps

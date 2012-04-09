@@ -83,6 +83,42 @@ if(isset($_GET['id'])){
 /* WP SIMILE Timeline JavaScript configuration script
  * Plugin version: <?php echo get_option('stl_timeline_plugin_version'); ?>
  */
+
+/* ================ CompactPainter Info Bubble Fix (http://www.simile-widgets.org/wiki/Timeline_CustomEventClickHandler) ========= */
+Timeline.CompactEventPainter.prototype._onClickMultiplePreciseInstantEvent=function(E,A,B){var F=SimileAjax.DOM.getPageCoordinates(E);
+this._showBubble(F.left+Math.ceil(E.offsetWidth/2),F.top+Math.ceil(E.offsetHeight/2),B);
+var D=[];
+for(var C=0;
+C<B.length;
+C++){D.push(B[C].getID());
+}this._fireOnSelect(D);
+A.cancelBubble=true;
+SimileAjax.DOM.cancelEvent(A);
+return false;
+};
+Timeline.CompactEventPainter.prototype._onClickInstantEvent=function(C,A,B){var D=SimileAjax.DOM.getPageCoordinates(C);
+this._showBubble(D.left+Math.ceil(C.offsetWidth/2),D.top+Math.ceil(C.offsetHeight/2),B);
+this._fireOnSelect(B.getID());
+A.cancelBubble=true;
+SimileAjax.DOM.cancelEvent(A);
+return false;
+};
+Timeline.CompactEventPainter.prototype._onClickDurationEvent=function(F,B,C){if("pageX" in B){var A=B.pageX;
+var E=B.pageY;
+}else{var D=SimileAjax.DOM.getPageCoordinates(F);
+var A=B.offsetX+D.left;
+var E=B.offsetY+D.top;
+}this._showBubble(A,E,C);
+this._fireOnSelect(C.getID());
+B.cancelBubble=true;
+SimileAjax.DOM.cancelEvent(B);
+return false;
+};
+Timeline.CompactEventPainter.prototype.showBubble=function(A){var B=this._eventIdToElmt[A.getID()];
+if(B){var C=SimileAjax.DOM.getPageCoordinates(B);
+this._showBubble(C.left+B.offsetWidth/2,C.top+B.offsetHeight/2,A);
+}};
+/* ============================================================================ */
 var tl;
 function loadSimileTimeline() {
 	
@@ -222,8 +258,13 @@ foreach($stl_bands as $band){
 	
 	// OVERRIDE SIMILE API: change click event for timeline entries
 	if(get_option('stl_timeline_linkhandling')){
-		echo 'Timeline.OriginalEventPainter.prototype._showBubble = function(x,y,evt){';
-		echo 'document.location.href=evt.getLink();';
+		if($useCompactPainter){
+			echo 'Timeline.CompactEventPainter.prototype._showBubble = function(x,y,evts){';
+		}
+		else{
+			echo 'Timeline.OriginalEventPainter.prototype._showBubble = function(x,y,evts){';
+		}
+		echo 'document.location.href=evts.getLink();';
 		echo '}';
 	}
 ?>
